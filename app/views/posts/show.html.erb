@@ -1,0 +1,28 @@
+<h1><%= @post.name %></h1>
+<hr />
+<h3>Comments</h3>
+<div class="well">
+  <%= link_to "New Comment", new_post_comment_path(@post), class: "btn btn-primary" %>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Created On</th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <% if @post.comments.count > 0 %>
+    <% @post.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.description %></td>
+        <td><%= time_ago_in_words comment.created_at %> ago</td>
+        <td><%= link_to "Edit", edit_post_comment_path(@post, comment), class:"btn btn-default" %></td>
+      </tr>
+    <% end %>
+  <% else %>
+    <tr>
+      <td colspan="2">No comments found for this post.  Click the 'New comment' button to create a new comment.</td>
+    </tr>
+  <% end %>
+</table>

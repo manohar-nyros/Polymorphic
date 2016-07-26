@@ -1,0 +1,32 @@
+<h1>Posts</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Number of Comments</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @posts.count == 0 %>
+      <tr>
+        <td colspan="3">
+          No posts found.
+        </td>
+      </tr>
+    <% else %>
+      <% @posts.each do |post| %>
+        <tr>
+          <td><%= link_to post.name, post %></td>
+          <td><%= post.comments.count %></td>
+          <td><%= link_to "Edit", edit_post_path(post), class: "btn btn-default" %></td>
+          <td><%= link_to "Destroy", post, class: 'btn btn-default', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>
+<div class="well">
+<%= link_to "New Post", new_post_path, class: "btn btn-primary" %>
+</div>

@@ -1,0 +1,22 @@
+<h1><%= "#{@article.name}" %></h1>
+<hr />
+<h3>Comments</h3>
+<div class="well">
+  <%= link_to "New comment", new_article_comment_path(@article), class: "btn btn-primary" %>
+</div>
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Created On</th>
+      <td></td>
+    </tr>
+  </thead>
+    <% @article.comments.each do |comment| %>
+      <tr>
+        <td><%= comment.description %></td>
+        <td><%= time_ago_in_words comment.created_at %> ago</td>
+        <td><%= link_to "Edit", edit_article_comment_path(@article, comment), class: "btn btn-default" %></td>
+      </tr>
+    <% end %>
+</table>
